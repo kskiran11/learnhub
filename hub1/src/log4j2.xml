@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j">
+	<Appenders>
+		<RollingFile name="FileAppender" fileName="/dontdelete/var/log/hub.log"
+			filePattern="/dontdelete/var/log/hub_%d{dd-MM-yyyy}-%i.log"
+			immediateFlush="true">
+			<PatternLayout pattern="%d{dd-MM-yy HH:mm:ss}---[%t] %-5p ...%c %x - %m\n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+			<DefaultRollOverStrategy max="100" />
+		</RollingFile>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{dd-MM-yy HH:mm:ss}---[%t] %-5p ...%c %x - %m\n" />
+		</Console>
+	</Appenders>
+	<!-- <Loggers>
+		<Logger name="org.springframework" level="INFO">
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+		<Logger name="org.mongodb.driver" level="INFO">
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+		<Root level="INFO">
+			<AppenderRef ref="FileAppender" />
+		</Root>
+	</Loggers> -->
+	<Loggers>
+		<Logger name="org.springframework" level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+		<Logger name="org.mongodb.driver" level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+		</Logger>
+		<Root level="DEBUG">
+			<AppenderRef ref="ConsoleAppender" />
+		</Root>
+	</Loggers>
+</log4j:configuration>
